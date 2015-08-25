@@ -1,0 +1,67 @@
+<div class="invoices">
+  <div layout="row" layout-align="center center">
+    <div ng-show="vm.loading" class="md-display-1 md-padding">Loading invoices...</div>
+    <div ng-show="!vm.loading && vm.invoices.length <= 0" class="md-display-1 md-padding">No invoices</div>
+  </div>
+  <table ng-hide="vm.loading || vm.invoices.length <= 0">
+    <thead>
+      <tr>
+        <th>Number</th>
+        <th>Date</th>
+        <th>Due date</th>
+        <th>Status</th>
+        <th>Total</th>
+        <th>Due</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat-start="invoice in vm.invoices">
+        <td>
+          <a href="#" ng-click="vm.toggleInvoice(invoice)">
+            {{ ::invoice.invoice_number }}
+          </a>
+        </td>
+        <td>{{ ::invoice.date | date }}</td>
+        <td>{{ ::invoice.due_date | date }}</td>
+        <td>{{ ::invoice.status }}</td>
+        <td><strong>{{ ::invoice.total | currency }}</strong></td>
+        <td>{{ ::invoice.amount_due | currency }}</td>
+      </tr>
+      <tr ng-repeat-end ng-if="vm.invoice.invoice_id == invoice.invoice_id">
+        <td colspan="6">
+          <table class="md-padding">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Unit amount</th>
+                <th>Line amount</th>
+                <th>Client manager</th>
+                <th>Job</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in ::vm.invoice.line_items track by $index">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ ::item.item_code }}</td>
+                <td>{{ ::item.description }}</td>
+                <td>{{ ::item.quantity }}</td>
+                <td>{{ ::item.unit_amount | currency }}</td>
+                <td>{{ ::item.line_amount | currency }}</td>
+                <td ng-repeat="tracking in item.tracking | filter:{name:'Client Manager'}">
+                  {{ ::tracking.option }}
+                </td>
+                <td ng-repeat="tracking in item.tracking | filter:{name:'Job'}">
+                  {{ ::tracking.option }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- <div json-human="vm.invoice"></div> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

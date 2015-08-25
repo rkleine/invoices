@@ -1,0 +1,45 @@
+<html ng-app="app">
+  <meta charset="UTF-8">
+  <head>
+    <meta charset="utf-8">
+    <title>invoices</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/vendor/angular-material.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+
+  <body layout="column">
+    <md-content layout="row" flex>
+      <md-content flex="25" ng-controller="ContactsController as vm" layout="column">
+        <input ng-model="query" type="search" placeholder="Search" class="md-padding" autofocus />
+        <md-divider></md-divider>
+        <md-content>
+          <ul ng-if="vm.contacts.length > 0">
+            <li ng-repeat="contact in vm.contacts | filter:query" ui-sref-active="active">
+              <a flex ui-sref="invoices({contactId: contact.contact_id})">
+                {{ ::contact.name }} <br>
+                <small><strong>{{ ::contact.account_number }}</strong></small>
+              </a>
+            </li>
+          </ul>
+          <div ng-if="vm.contacts.length <= 0" layout="row" layout-align="center center">
+            <div class="md-title md-padding">No results</div>
+          </div>
+        </md-content>
+      </md-content>
+      <md-content class="md-whiteframe-z1" flex="75" ui-view></md-content>
+    </md-content>
+
+    <script src="js/vendor/angular.min.js"></script>
+    <script src="js/vendor/angular-animate.min.js"></script>
+    <script src="js/vendor/angular-aria.min.js"></script>
+    <script src="js/vendor/angular-ui-router.min.js"></script>
+    <script src="js/vendor/angular-material.min.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/contacts.js"></script>
+    <script src="js/invoices.js"></script>
+  </body>
+</html>

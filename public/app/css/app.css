@@ -1,0 +1,58 @@
+@import url('//fonts.googleapis.com/css?family=Roboto:400,700,700italic,400italic');
+
+html {
+  font-family: 'Roboto', serif;
+}
+
+input[type="search"] {
+  display: block;
+  width: 100%;
+  outline: none !important;
+  box-sizing: border-box;
+  border: none;
+  height: 49px !important;
+  min-height: 49px !important;
+  max-height: 49px !important;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: block;
+}
+
+li a {
+  padding: 15px;
+  display: block;
+  color: #000;
+  text-decoration: none;
+}
+
+li a {
+  outline: none !important;
+}
+
+li a:focus {
+  background: #e0e0e0;
+}
+
+li.active a {
+  background: #FFF765;
+}
+
+.invoices table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.invoices table td, .invoices table td th {
+  border: 1px solid #e4e4e4;
+  padding: 5px;
+}
+
+.invoices > table > thead > tr > th {
+  padding: 14px 0 15px;
+}
